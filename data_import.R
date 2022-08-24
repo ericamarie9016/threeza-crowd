@@ -12,6 +12,9 @@ download_d1_data(BQ3, path)
 download_d1_data(PRM, path)
 
 ## List of folders
-# metajam.log                    __QuebradaCuenca3-Bisley__csv
-# __QuebradaCuenca1-Bisley__csv  __RioMameyesPuenteRoto__csv
-# __QuebradaCuenca2-Bisley__csv
+# /courses/EDS214/threeza-crowd
+  # metajam.log                    
+  # __QuebradaCuenca3-Bisley__csv
+  # __QuebradaCuenca1-Bisley__csv  
+  # __RioMameyesPuenteRoto__csv
+  # __QuebradaCuenca2-Bisley__csv
