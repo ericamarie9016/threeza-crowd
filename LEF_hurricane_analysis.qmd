@@ -1,0 +1,45 @@
+---
+title: "Water Chemistry Script"
+format: html
+editor: visual
+execute: 
+  echo: true
+  warning: false
+---
+
+## 
+
+```{r}
+library(metajam)
+library(tidyverse)
+library(here)
+library(janitor)
+```
+
+### Reading in the raw data
+
+```{r}
+## Read in the data using metajam:
+
+raw_BQ1 <- metajam::read_d1_files(
+  folder_path = "/courses/EDS214/threeza-crowd/__QuebradaCuenca1-Bisley__csv", 
+  fnc = "read_csv")
+raw_BQ2 <- metajam::read_d1_files(
+  folder_path = "/courses/EDS214/threeza-crowd/__QuebradaCuenca2-Bisley__csv", 
+  fnc = "read_csv")
+raw_BQ3 <- metajam::read_d1_files(
+  folder_path = "/courses/EDS214/threeza-crowd/__QuebradaCuenca3-Bisley__csv", 
+  fnc = "read_csv")
+raw_PRM <- metajam::read_d1_files(
+  folder_path = "/courses/EDS214/threeza-crowd/__RioMameyesPuenteRoto__csv", 
+  fnc = "read_csv")
+
+## Save the data frames from each site data set as the initial data frame for each
+
+BQ1_initial <- raw_BQ1$data
+BQ2_initial <- raw_BQ2$data
+BQ3_initial <- raw_BQ3$data
+PRM_initial <- raw_PRM$data
+
+```
+
