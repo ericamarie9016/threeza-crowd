@@ -42,7 +42,7 @@ If you have any questions, comments, or concerns, please reach out to a group me
 Michael Zargari   Github: @mzargari         Email: mzargari@bren.ucsb.edu\
 Meagan Brown      Github: @meaganbrown      Email: meagan_brown@bren.ucsb.edu\
 Hailey Veirs      Github: @hveirs           Email: hveirs@bren.ucsb.edu\
-Erica Dale        Github: @ericamarie9016   Email: ericadale@bren.ucsb.edu\
+Erica Dale        Github: @ericamarie9016   Email: ericadale@bren.ucsb.edu
 
 ## Assignment Workflow 
 
