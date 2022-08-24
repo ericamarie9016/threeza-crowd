@@ -39,10 +39,10 @@ A folder containing the notes that I took throughout this course. It also contai
 
 If you have any questions, comments, or concerns, please reach out to a group member using the information below:
 
-Michael Zargari   Github: @mzargari         Email: mzargari@bren.ucsb.edu\n
-Meagan Brown      Github: @meaganbrown      Email: meagan_brown@bren.ucsb.edu\n
-Hailey Veirs      Github: @hveirs           Email: hveirs@bren.ucsb.edu\n
-Erica Dale        Github: @ericamarie9016   Email: ericadale@bren.ucsb.edu\n
+Michael Zargari   Github: @mzargari         Email: mzargari@bren.ucsb.edu\
+Meagan Brown      Github: @meaganbrown      Email: meagan_brown@bren.ucsb.edu\
+Hailey Veirs      Github: @hveirs           Email: hveirs@bren.ucsb.edu\
+Erica Dale        Github: @ericamarie9016   Email: ericadale@bren.ucsb.edu\
 
 ## Assignment Workflow 
 
