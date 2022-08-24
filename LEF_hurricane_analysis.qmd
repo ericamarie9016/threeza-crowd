@@ -43,3 +43,16 @@ PRM_initial <- raw_PRM$data
 
 ```
 
+## Psuedo Code
+
+```{r}
+##Read in Q1, Q2, Q3, RMP data sets
+##Merge the 4 data sets by date
+##Clean names
+##Pivot longer
+##Select for NO3- (Nitrate) and K (Potassium)
+##Group by site
+##ggplot for Potassium
+##ggplot for Nitrate
+##add ggplots together using divide (potassium/nitrate)
+```
