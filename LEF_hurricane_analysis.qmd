@@ -14,6 +14,7 @@ library(metajam)
 library(tidyverse)
 library(here)
 library(janitor)
+library(lubridate)
 ```
 
 ### Reading in the raw data
@@ -40,7 +41,6 @@ BQ1_initial <- raw_BQ1$data
 BQ2_initial <- raw_BQ2$data
 BQ3_initial <- raw_BQ3$data
 PRM_initial <- raw_PRM$data
-
 ```
 
 ## Psuedo Code
@@ -55,4 +55,31 @@ PRM_initial <- raw_PRM$data
 ##ggplot for Potassium
 ##ggplot for Nitrate
 ##add ggplots together using divide (potassium/nitrate)
+```
+
+## Cleaning the data
+
+```{r}
+bq1 <- BQ1_initial %>% 
+  clean_names()
+
+bq2 <- BQ2_initial %>% 
+  clean_names()
+
+bq3 <- BQ3_initial %>% 
+  clean_names()
+
+prm <- PRM_initial %>%
+  clean_names()
+```
+
+## Combine the rows
+
+```{r}
+joined_data <- bind_rows(bq1, bq2, bq3, prm)
+
+## select to keep rows: sample_id, sample_date, no3_n, k
+stream_quality <- joined_data %>%
+  select(sample_id, sample_date, no3_n, k) %>% 
+  mutate(year = year(sample_date))
 ```
