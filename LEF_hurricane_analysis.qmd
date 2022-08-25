@@ -40,7 +40,6 @@ library(lubridate)
 
 ## Combining plots side by side
 library(patchwork)
-
 ```
 
 ## Pseudo Code (First draft)
@@ -128,7 +127,6 @@ monthly_quality <- stream_quality %>%
 ## Creating our first graph
 
 ```{r}
-
 ## Creating a graph for nitrate levels over time.
 monthlyno3graph <- ggplot(monthly_quality, 
                           aes(x = date, 
@@ -156,7 +154,6 @@ monthlykgraph <- ggplot(monthly_quality,
   geom_vline(xintercept = as.numeric(as.Date("1989-09-01")), 
              linetype = 4)
   
-
 
 monthlykgraph / monthlyno3graph
 ```
@@ -244,7 +241,6 @@ temp_plot <- ggplot(data = min_monthly,
        title = "Minimum monthly tempuratures from years 2010-2018",
        caption = "data source: https://doi.org/10.6073/pasta/1dd1a59a7e6fbe95fdf8736477d81b83",
        subtitle = "Luquillo Mountain (Luquillo Experimental Forest) sites") 
-
 
 
 temp_plot
