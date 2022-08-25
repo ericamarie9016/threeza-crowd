@@ -43,7 +43,7 @@ PRM_initial <- raw_PRM$data
 
 ```
 
-## Psuedo Code
+## Pseudo Code
 
 ```{r}
 ##Read in Q1, Q2, Q3, RMP data sets
