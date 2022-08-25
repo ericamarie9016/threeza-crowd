@@ -129,6 +129,7 @@ monthly_quality <- stream_quality %>%
 
 ```{r}
 
+## Creating a graph for nitrate levels over time.
 monthlyno3graph <- ggplot(monthly_quality, 
                           aes(x = date, 
                               y = monthlyno3)) +
@@ -200,21 +201,28 @@ monthlykgraph / monthlyno3graph
 # 
 ```
 
-Sentiments vs temp
+# Minimum monthly temperature rise from 2010-2018
+
+## Filtering data
 
 ```{r}
-
-stream_explore <- joined_data %>%
+# Creating monthly data from 2010 to 2018
+monthly_temps <- joined_data %>%
   select(sample_id, sample_date, temp) %>% 
   mutate(year = year(sample_date),
          date = ymd(paste0(year, "-", month(sample_date), "-1"))) %>% 
   filter(year %in% 2010:2018) 
 
-monthly_explore <- stream_explore %>% 
+## Finding the minimum tempurature 
+min_monthly <- monthly_temps %>% 
   group_by(sample_id, date) %>%  
   summarize(temp = min(temp))
+```
 
-temp_plot <- ggplot(data = monthly_explore,
+## Creating visualization
+
+```{r}
+temp_plot <- ggplot(data = min_monthly,
        aes(x = date,
            y = temp)) +
   geom_point(aes(color = sample_id)) +
