@@ -157,7 +157,7 @@ monthlykgraph <- ggplot(monthly_quality,
 monthlykgraph / monthlyno3graph
 ```
 
-## Workflow
+### Workflow: we experimented with answering different questions and this was the code from those times
 
 ```{r}
 # stream_explore <- joined_data %>%
@@ -213,7 +213,7 @@ monthly_temps <- joined_data %>%
          date = ymd(paste0(year, "-", month(sample_date), "-1"))) %>% 
   filter(year %in% 2010:2018) 
 
-## Finding the minimum tempurature 
+## Finding the minimum tempurature every month
 min_monthly <- monthly_temps %>% 
   group_by(sample_id, date) %>%  
   summarize(temp = min(temp))
@@ -222,6 +222,7 @@ min_monthly <- monthly_temps %>%
 ## Creating visualization
 
 ```{r}
+## Creating a temperature plot for each site to show the increases in the minimum monthly temperatures from 2010-2018
 temp_plot <- ggplot(data = min_monthly,
        aes(x = date,
            y = temp)) +
