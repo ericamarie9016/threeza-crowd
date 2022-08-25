@@ -40,6 +40,7 @@ library(lubridate)
 
 ## Combining plots side by side
 library(patchwork)
+
 ```
 
 ## Pseudo Code (First draft)
@@ -127,7 +128,7 @@ monthly_quality <- stream_quality %>%
 ## Creating our first graph
 
 ```{r}
-## Test comment
+
 monthlyno3graph <- ggplot(monthly_quality, 
                           aes(x = date, 
                               y = monthlyno3)) +
@@ -220,11 +221,13 @@ temp_plot <- ggplot(data = monthly_explore,
   geom_smooth(method = lm, se = FALSE, col = 'red', size = 1) +
   theme_minimal() +
   facet_wrap(~sample_id) +
+  theme_classic() +
   theme(legend.position = "none",
         axis.text.x = element_text(colour = "black"),
         axis.text.y = element_text(colour = "black")) +
   labs(x = "Year",
-       y = "Temperature (Celsius)")
+       y = "Temperature (Celsius)") 
+
 
 temp_plot
 ```
