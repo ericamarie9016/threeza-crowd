@@ -48,15 +48,15 @@ raw_PRM <- raw_PRM$data
 ## Pseudo Code
 
 ```{r}
-##Read in Q1, Q2, Q3, RMP data sets
-##Merge the 4 data sets by date
-##Clean names
-##Pivot longer
-##Select for NO3- (Nitrate) and K (Potassium)
-##Group by site
-##ggplot for Potassium
-##ggplot for Nitrate
-##add ggplots together using divide (potassium/nitrate)
+## Read in Q1, Q2, Q3, RMP data sets
+## Merge the 4 data sets by date
+## Clean names
+## Pivot longer
+## Select for NO3- (Nitrate) and K (Potassium)
+## Group by site
+## ggplot for Potassium
+## ggplot for Nitrate
+## add ggplots together using divide (potassium/nitrate)
 ```
 
 ## Cleaning the data
@@ -95,11 +95,6 @@ monthly_quality <- stream_quality %>%
 ## We might want to add a column for the chemical type (pivot.longer)
 ```
 
-```{r}
-## select to keep rows: sample_id, sample_date, no3_n, k
-
-```
-
 ## Creating our first graph
 
 ```{r}
@@ -113,76 +108,71 @@ monthlykgraph <- ggplot(monthly_quality, aes(x = date, y = monthlyk)) +
 monthlyno3graph / monthlykgraph
 ```
 
+## Workflow
+
 ```{r}
-stream_explore <- joined_data %>%
-  select(sample_id, sample_date, p_h, si_o2, temp) %>% 
-  mutate(year = year(sample_date),
-         date = ymd(paste0(year, "-", month(sample_date), "-1"))) %>% 
-  filter(year %in% 2007:2009) 
-
-monthly_explore <- stream_explore %>% 
-  group_by(sample_id, date) %>%  
-  summarize(p_h = mean(p_h, na.rm = TRUE),
-            temp = mean(temp, na.rm = TRUE)) %>% 
-  pivot_longer(cols = p_h:temp, 
-               names_to = "indicator", 
-               values_to = "value")
-
-ggplot(data = monthly_explore,
-       aes(x= date,
-           y = value)) +
-  geom_line() +
-  facet_wrap(~indicator,scales = "free")
-
-# temp <- monthly_explore %>% 
-#   filter(indicator %in% c("temp"))
-#          
-# ph_only <- monthly_explore %>% 
-#   filter(indicator == "p_h")
+# stream_explore <- joined_data %>%
+#   select(sample_id, sample_date, p_h, si_o2, temp) %>% 
+#   mutate(year = year(sample_date),
+#          date = ymd(paste0(year, "-", month(sample_date), "-1"))) %>% 
+#   filter(year %in% 2007:2009) 
 # 
-# ph <- ggplot(data = ph_only,
-#        aes(x = date,
+# monthly_explore <- stream_explore %>% 
+#   group_by(sample_id, date) %>%  
+#   summarize(p_h = mean(p_h, na.rm = TRUE),
+#             temp = mean(temp, na.rm = TRUE)) %>% 
+#   pivot_longer(cols = p_h:temp, 
+#                names_to = "indicator", 
+#                values_to = "value")
+# 
+# ggplot(data = monthly_explore,
+#        aes(x= date,
 #            y = value)) +
-#   geom_line()
+#   geom_line() +
+#   facet_wrap(~indicator,scales = "free")
 # 
-# tempplot <- ggplot(temp,
-#        aes(x = date,
-#            y = value,
-#            color = indicator)) +
-#   geom_line()
+# # temp <- monthly_explore %>% 
+# #   filter(indicator %in% c("temp"))
+# #          
+# # ph_only <- monthly_explore %>% 
+# #   filter(indicator == "p_h")
+# # 
+# # ph <- ggplot(data = ph_only,
+# #        aes(x = date,
+# #            y = value)) +
+# #   geom_line()
+# # 
+# # tempplot <- ggplot(temp,
+# #        aes(x = date,
+# #            y = value,
+# #            color = indicator)) +
+# #   geom_line()
+# # 
+# # tempplot / ph
 # 
-# tempplot / ph
-
-
 ```
 
-## OLD
+Sentiments vs temp
 
 ```{r}
+## TSS and PH
 stream_explore <- joined_data %>%
-  select(sample_id, sample_date, p_h, si_o2, temp) %>% 
+  select(sample_id, sample_date, temp) %>% 
   mutate(year = year(sample_date),
          date = ymd(paste0(year, "-", month(sample_date), "-1"))) %>% 
-  filter(year %in% 2003:2007) 
+  filter(year %in% 2010:2018) 
 
 monthly_explore <- stream_explore %>% 
   group_by(sample_id, date) %>%  
-  summarize(p_h = mean(p_h, na.rm = TRUE),
-            si_o2 = mean(si_o2, na.rm = TRUE),
-            temp = mean(temp, na.rm = TRUE)) %>% 
-  pivot_longer(cols = p_h:temp, 
-               names_to = "indicator", 
-               values_to = "value")
+  summarize(temp = min(temp))
 
-
-
-ggplot(monthly_explore,
+temp_plot <- ggplot(data = monthly_explore,
        aes(x = date,
-           y = value,
-           color = indicator)) +
-  geom_line() 
-    # scale_y_continuous(
-    #   "ph",
-    #   sec.axis = sec_axis(~. * 0.25, name = "ph")
-    # )
+           y = temp)) +
+  geom_point(aes(color = sample_id)) +
+  geom_smooth(method = lm, se = FALSE, col = 'red', size = 1) +
+  theme_minimal() +
+  facet_wrap(~sample_id)
+
+temp_plot
 ```
