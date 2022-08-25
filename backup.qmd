@@ -8,7 +8,6 @@ execute:
   message: false
 ---
 
-## 
 
 ```{r}
 library(metajam)
@@ -198,3 +197,4 @@ temp_plot <- ggplot(data = monthly_explore,
 
 temp_plot
 ```
+
