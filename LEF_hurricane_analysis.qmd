@@ -116,7 +116,7 @@ stream_quality <- joined_data %>%
   select(sample_id, sample_date, no3_n, k) %>% 
   mutate(year = year(sample_date),
          date = ymd(paste0(year, "-", month(sample_date), "-1"))) %>% 
-  filter(year %in% 1988:1994) 
+  filter(year %in% 1988:1994)
 
 ## We are summarizing the data to get the mean of each of our variables (nitrate and potassium)
 monthly_quality <- stream_quality %>% 
