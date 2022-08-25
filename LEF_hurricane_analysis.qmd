@@ -2,50 +2,48 @@
 title: "Water Chemistry Script"
 format: html
 editor: visual
+author: Hailey Veirs, Meagan Brown, Michael Zargari, Erica Dale
 execute: 
   echo: true
   warning: false
   message: false
 ---
 
-## 
+## Installing packages
 
 ```{r}
+## install.packages("metajam")
+## install.packages("tidyverse")
+## install.packages("here")
+## install.packages("janitor")
+## install.packages("lubridate")
+## install.packages("patchwork")
+```
+
+## Loading libraries
+
+```{r}
+## Importing data directly from website
 library(metajam)
+
+## Used to tidy/clean up data and create beautiful ggplots
 library(tidyverse)
+
+## Helps us get to file paths
 library(here)
+
+## Cleans up column names
 library(janitor)
+
+## Easy dating
 library(lubridate)
+
+## Combining plots side by side
 library(patchwork)
+
 ```
 
-### Reading in the raw data
-
-```{r}
-## Read in the data using metajam:
-
-raw_BQ1 <- metajam::read_d1_files(
-  folder_path = "/courses/EDS214/threeza-crowd/__QuebradaCuenca1-Bisley__csv", 
-  fnc = "read_csv")
-raw_BQ2 <- metajam::read_d1_files(
-  folder_path = "/courses/EDS214/threeza-crowd/__QuebradaCuenca2-Bisley__csv", 
-  fnc = "read_csv")
-raw_BQ3 <- metajam::read_d1_files(
-  folder_path = "/courses/EDS214/threeza-crowd/__QuebradaCuenca3-Bisley__csv", 
-  fnc = "read_csv")
-raw_PRM <- metajam::read_d1_files(
-  folder_path = "/courses/EDS214/threeza-crowd/__RioMameyesPuenteRoto__csv", 
-  fnc = "read_csv")
-
-## Save the data frames from each site data set as the initial data frame for each
-
-raw_BQ1 <- raw_BQ1$data
-raw_BQ2 <- raw_BQ2$data
-raw_BQ3 <- raw_BQ3$data
-raw_PRM <- raw_PRM$data
-```
-
-## Pseudo Code
+## Pseudo Code (First draft)
 
 ```{r}
 ## Read in Q1, Q2, Q3, RMP data sets
@@ -59,7 +57,38 @@ raw_PRM <- raw_PRM$data
 ## add ggplots together using divide (potassium/nitrate)
 ```
 
+## Reading in the raw data
+
+```{r}
+## Read in the data using metajam:
+
+raw_BQ1 <- metajam::read_d1_files(
+  folder_path = "/courses/EDS214/threeza-crowd/__QuebradaCuenca1-Bisley__csv", 
+  fnc = "read_csv")
+
+raw_BQ2 <- metajam::read_d1_files(
+  folder_path = "/courses/EDS214/threeza-crowd/__QuebradaCuenca2-Bisley__csv", 
+  fnc = "read_csv")
+
+raw_BQ3 <- metajam::read_d1_files(
+  folder_path = "/courses/EDS214/threeza-crowd/__QuebradaCuenca3-Bisley__csv", 
+  fnc = "read_csv")
+
+raw_PRM <- metajam::read_d1_files(
+  folder_path = "/courses/EDS214/threeza-crowd/__RioMameyesPuenteRoto__csv", 
+  fnc = "read_csv")
+
+## Save the data frames from each site data set as the initial data frame for each
+
+raw_BQ1 <- raw_BQ1$data
+raw_BQ2 <- raw_BQ2$data
+raw_BQ3 <- raw_BQ3$data
+raw_PRM <- raw_PRM$data
+```
+
 ## Cleaning the data
+
+### The code below gives us a standard naming convention by making all titles lowercase and formatting special characters
 
 ```{r}
 bq1 <- raw_BQ1 %>% 
@@ -78,37 +107,57 @@ prm <- raw_PRM %>%
 ## Combine the rows
 
 ```{r}
+## We are stacking the data to match the datasets by the column names. 
 joined_data <- bind_rows(bq1, bq2, bq3, prm)
 
-## select to keep rows: sample_id, sample_date, no3_n, k
+## Select to keep rows: sample_id, sample_date, no3_n, k
+## We also are plotting the values by month so we standardized all dates to fall on the first of every month
 stream_quality <- joined_data %>%
   select(sample_id, sample_date, no3_n, k) %>% 
   mutate(year = year(sample_date),
          date = ymd(paste0(year, "-", month(sample_date), "-1"))) %>% 
   filter(year %in% 1988:1994) 
 
+## We are summarizing the data to get the mean of each of our variables (nitrate and potassium)
 monthly_quality <- stream_quality %>% 
   group_by(sample_id, date) %>%  
   summarize(monthlyno3 = mean(no3_n, na.rm = TRUE),
             monthlyk = mean(k, na.rm = TRUE))
-
-## We might want to add a column for the chemical type (pivot.longer)
 ```
 
 ## Creating our first graph
 
 ```{r}
-monthlyno3graph <- ggplot(monthly_quality, aes(x = date, y = monthlyno3)) +
-  geom_line(aes(color = sample_id))
 
-monthlykgraph <- ggplot(monthly_quality, aes(x = date, y = monthlyk)) +
-  geom_line(aes(color = sample_id))
+## Creating a graph for nitrate levels over time.
+monthlyno3graph <- ggplot(monthly_quality, 
+                          aes(x = date, 
+                              y = monthlyno3)) +
+  geom_line(aes(color = sample_id)) +
+  theme_classic() +
+  theme(legend.title = element_blank(),
+        axis.text.x = element_text(colour = "black"),
+        axis.text.y = element_text(colour = "black")) +
+  labs(x = "Year",
+       y = "K mg")
+
+monthlykgraph <- ggplot(monthly_quality, 
+                        aes(x = date, 
+                            y = monthlyk)) +
+  geom_line(aes(color = sample_id)) +
+  theme_classic() +
+  theme(legend.title = element_blank(),
+        axis.text.x = element_text(colour = "black"),
+        axis.text.y = element_text(colour = "black")) +
+  labs(x = "Year",
+       y = "N03-N ug")
+  
 
 
-monthlyno3graph / monthlykgraph
+monthlykgraph / monthlyno3graph
 ```
 
-## Workflow
+### Workflow: we experimented with answering different questions and this was the code from those times
 
 ```{r}
 # stream_explore <- joined_data %>%
@@ -152,27 +201,47 @@ monthlyno3graph / monthlykgraph
 # 
 ```
 
-Sentiments vs temp
+# Minimum monthly temperature rise from 2010-2018
+
+## Filtering data
 
 ```{r}
-## TSS and PH
-stream_explore <- joined_data %>%
+# Creating monthly data from 2010 to 2018
+monthly_temps <- joined_data %>%
   select(sample_id, sample_date, temp) %>% 
   mutate(year = year(sample_date),
          date = ymd(paste0(year, "-", month(sample_date), "-1"))) %>% 
   filter(year %in% 2010:2018) 
 
-monthly_explore <- stream_explore %>% 
+## Finding the minimum tempurature every month
+min_monthly <- monthly_temps %>% 
   group_by(sample_id, date) %>%  
   summarize(temp = min(temp))
+```
 
-temp_plot <- ggplot(data = monthly_explore,
+## Creating visualization
+
+```{r}
+## Creating a temperature plot for each site to show the increases in the minimum monthly temperatures from 2010-2018
+temp_plot <- ggplot(data = min_monthly,
        aes(x = date,
            y = temp)) +
   geom_point(aes(color = sample_id)) +
-  geom_smooth(method = lm, se = FALSE, col = 'red', size = 1) +
+  scale_color_manual(values = c("#65AFC0", "#C986E7", "#6BCB9B", "darkgoldenrod2")) +
+  geom_smooth(method = lm, se = FALSE, col = 'darkorange3', size = 1) +
   theme_minimal() +
-  facet_wrap(~sample_id)
+  facet_wrap(~sample_id) +
+  theme_classic() +
+  theme(legend.position = "none",
+        axis.text.x = element_text(colour = "black"),
+        axis.text.y = element_text(colour = "black")) +
+  labs(x = "Year",
+       y = "Temperature (Celsius)",
+       title = "Minimum monthly tempuratures from years 2010-2018",
+       caption = "data source: https://doi.org/10.6073/pasta/1dd1a59a7e6fbe95fdf8736477d81b83",
+       subtitle = "Luquillo Mountain (Luquillo Experimental Forest) sites") 
+
+
 
 temp_plot
 ```

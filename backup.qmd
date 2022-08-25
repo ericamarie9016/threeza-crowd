@@ -1,0 +1,87 @@
+---
+title: "Water Chemistry Script"
+format: html
+editor: visual
+author: Hailey Veirs, Meagan Brown, Michael Zargari, Erica Dale
+execute: 
+  echo: true
+  warning: false
+  message: false
+---
+
+## Installing packages
+
+```{r}
+## install.packages("metajam")
+## install.packages("tidyverse")
+## install.packages("here")
+## install.packages("janitor")
+## install.packages("lubridate")
+## install.packages("patchwork")
+```
+
+## Loading libraries
+
+```{r}
+## Importing data directly from website
+library(metajam)
+
+## Used to tidy/clean up data and create beautiful ggplots
+library(tidyverse)
+
+## Helps us get to file paths
+library(here)
+
+## Cleans up column names
+library(janitor)
+
+## Easy dating
+library(lubridate)
+
+## Combining plots side by side
+library(patchwork)
+
+```
+
+## Pseudo Code (First draft)
+
+```{r}
+## Read in Q1, Q2, Q3, RMP data sets
+## Merge the 4 data sets by date
+## Clean names
+## Pivot longer
+## Select for NO3- (Nitrate) and K (Potassium)
+## Group by site
+## ggplot for Potassium
+## ggplot for Nitrate
+## add ggplots together using divide (potassium/nitrate)
+```
+
+## Reading in the raw data
+
+```{r}
+## Read in the data using metajam:
+
+raw_BQ1 <- metajam::read_d1_files(
+  folder_path = "/courses/EDS214/threeza-crowd/__QuebradaCuenca1-Bisley__csv", 
+  fnc = "read_csv")
+
+raw_BQ2 <- metajam::read_d1_files(
+  folder_path = "/courses/EDS214/threeza-crowd/__QuebradaCuenca2-Bisley__csv", 
+  fnc = "read_csv")
+
+raw_BQ3 <- metajam::read_d1_files(
+  folder_path = "/courses/EDS214/threeza-crowd/__QuebradaCuenca3-Bisley__csv", 
+  fnc = "read_csv")
+
+raw_PRM <- metajam::read_d1_files(
+  folder_path = "/courses/EDS214/threeza-crowd/__RioMameyesPuenteRoto__csv", 
+  fnc = "read_csv")
+
+## Save the data frames from each site data set as the initial data frame for each
+
+raw_BQ1 <- raw_BQ1$data
+raw_BQ2 <- raw_BQ2$data
+raw_BQ3 <- raw_BQ3$data
+raw_PRM <- raw_PRM$data
+```
