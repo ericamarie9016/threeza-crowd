@@ -118,26 +118,41 @@ stream_explore <- joined_data %>%
   select(sample_id, sample_date, p_h, si_o2, temp) %>% 
   mutate(year = year(sample_date),
          date = ymd(paste0(year, "-", month(sample_date), "-1"))) %>% 
-  filter(year %in% 2003:2007) 
+  filter(year %in% 2007:2009) 
 
 monthly_explore <- stream_explore %>% 
   group_by(sample_id, date) %>%  
   summarize(p_h = mean(p_h, na.rm = TRUE),
-            si_o2 = mean(si_o2, na.rm = TRUE),
-            temp = mean(temp, na.rm = TRUE)) 
+            temp = mean(temp, na.rm = TRUE)) %>% 
+  pivot_longer(cols = p_h:temp, 
+               names_to = "indicator", 
+               values_to = "value")
 
+ggplot(data = monthly_explore,
+       aes(x= date,
+           y = value)) +
+  geom_line() +
+  facet_wrap(~indicator,scales = "free")
 
-ggplot(monthly_explore,
-       aes(x = date)) +
-  geom_line(aes(y = log(p_h)), color = "blue") +
-  geom_line(aes(y = log(temp)), color = "red") +
-  geom_line(aes(y = log(si_o2)), color = "purple")
-        
-    # scale_y_continuous(
-    #   "ph",
-    #   sec.axis = sec_axis(~. * 0.25, name = "ph")
-    # )
- 
+# temp <- monthly_explore %>% 
+#   filter(indicator %in% c("temp"))
+#          
+# ph_only <- monthly_explore %>% 
+#   filter(indicator == "p_h")
+# 
+# ph <- ggplot(data = ph_only,
+#        aes(x = date,
+#            y = value)) +
+#   geom_line()
+# 
+# tempplot <- ggplot(temp,
+#        aes(x = date,
+#            y = value,
+#            color = indicator)) +
+#   geom_line()
+# 
+# tempplot / ph
+
 
 ```
 
