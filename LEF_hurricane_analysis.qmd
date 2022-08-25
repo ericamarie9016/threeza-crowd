@@ -300,3 +300,4 @@ lm_string_MPR
 # intercept <- lm_eqn$coefficients
 ```
 
+
