@@ -39,10 +39,10 @@ raw_PRM <- metajam::read_d1_files(
 
 ## Save the data frames from each site data set as the initial data frame for each
 
-BQ1_initial <- raw_BQ1$data
-BQ2_initial <- raw_BQ2$data
-BQ3_initial <- raw_BQ3$data
-PRM_initial <- raw_PRM$data
+raw_BQ1 <- raw_BQ1$data
+raw_BQ2 <- raw_BQ2$data
+raw_BQ3 <- raw_BQ3$data
+raw_PRM <- raw_PRM$data
 ```
 
 ## Psuedo Code
@@ -62,16 +62,16 @@ PRM_initial <- raw_PRM$data
 ## Cleaning the data
 
 ```{r}
-bq1 <- BQ1_initial %>% 
+bq1 <- raw_BQ1 %>% 
   clean_names()
 
-bq2 <- BQ2_initial %>% 
+bq2 <- raw_BQ2 %>% 
   clean_names()
 
-bq3 <- BQ3_initial %>% 
+bq3 <- raw_BQ3 %>% 
   clean_names()
 
-prm <- PRM_initial %>%
+prm <- raw_PRM %>%
   clean_names()
 ```
 
