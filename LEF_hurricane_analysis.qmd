@@ -139,7 +139,9 @@ monthlyno3graph <- ggplot(monthly_quality,
         axis.text.x = element_text(colour = "black"),
         axis.text.y = element_text(colour = "black")) +
   labs(x = "Year",
-       y = "K mg")
+       y = "K mg") +
+  geom_vline(xintercept = as.numeric(as.Date("1989-09-01")), 
+             linetype = 4)
 
 monthlykgraph <- ggplot(monthly_quality, 
                         aes(x = date, 
@@ -150,7 +152,9 @@ monthlykgraph <- ggplot(monthly_quality,
         axis.text.x = element_text(colour = "black"),
         axis.text.y = element_text(colour = "black")) +
   labs(x = "Year",
-       y = "N03-N ug")
+       y = "N03-N ug") +
+  geom_vline(xintercept = as.numeric(as.Date("1989-09-01")), 
+             linetype = 4)
   
 
 
