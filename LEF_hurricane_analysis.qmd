@@ -5,6 +5,7 @@ editor: visual
 execute: 
   echo: true
   warning: false
+  message: false
 ---
 
 ## 
@@ -15,6 +16,7 @@ library(tidyverse)
 library(here)
 library(janitor)
 library(lubridate)
+library(patchwork)
 ```
 
 ### Reading in the raw data
@@ -81,5 +83,32 @@ joined_data <- bind_rows(bq1, bq2, bq3, prm)
 ## select to keep rows: sample_id, sample_date, no3_n, k
 stream_quality <- joined_data %>%
   select(sample_id, sample_date, no3_n, k) %>% 
-  mutate(year = year(sample_date))
+  mutate(year = year(sample_date),
+         date = ymd(paste0(year, "-", month(sample_date), "-1"))) %>% 
+  filter(year %in% 1988:1994) 
+
+monthly_quality <- stream_quality %>% 
+  group_by(sample_id, date) %>%  
+  summarize(monthlyno3 = mean(no3_n, na.rm = TRUE),
+            monthlyk = mean(k, na.rm = TRUE))
+
+## We might want to add a column for the chemical type (pivot.longer)
+```
+
+```{r}
+## select to keep rows: sample_id, sample_date, no3_n, k
+
+```
+
+## Creating our first graph
+
+```{r}
+monthlyno3graph <- ggplot(monthly_quality, aes(x = date, y = monthlyno3)) +
+  geom_line(aes(color = sample_id))
+
+monthlykgraph <- ggplot(monthly_quality, aes(x = date, y = monthlyk)) +
+  geom_line(aes(color = sample_id))
+
+
+monthlyno3graph / monthlykgraph
 ```
