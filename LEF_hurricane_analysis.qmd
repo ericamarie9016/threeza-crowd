@@ -226,7 +226,8 @@ temp_plot <- ggplot(data = min_monthly,
        aes(x = date,
            y = temp)) +
   geom_point(aes(color = sample_id)) +
-  geom_smooth(method = lm, se = FALSE, col = 'red', size = 1) +
+  scale_color_manual(values = c("#65AFC0", "#C986E7", "#6BCB9B", "darkgoldenrod2")) +
+  geom_smooth(method = lm, se = FALSE, col = 'darkorange3', size = 1) +
   theme_minimal() +
   facet_wrap(~sample_id) +
   theme_classic() +
@@ -234,7 +235,11 @@ temp_plot <- ggplot(data = min_monthly,
         axis.text.x = element_text(colour = "black"),
         axis.text.y = element_text(colour = "black")) +
   labs(x = "Year",
-       y = "Temperature (Celsius)") 
+       y = "Temperature (Celsius)",
+       title = "Minimum monthly tempuratures from years 2010-2018",
+       caption = "data source: https://doi.org/10.6073/pasta/1dd1a59a7e6fbe95fdf8736477d81b83",
+       subtitle = "Luquillo Mountain (Luquillo Experimental Forest) sites") 
+
 
 
 temp_plot
