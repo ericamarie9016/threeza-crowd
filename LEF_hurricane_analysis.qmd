@@ -112,3 +112,62 @@ monthlykgraph <- ggplot(monthly_quality, aes(x = date, y = monthlyk)) +
 
 monthlyno3graph / monthlykgraph
 ```
+
+```{r}
+stream_explore <- joined_data %>%
+  select(sample_id, sample_date, p_h, si_o2, temp) %>% 
+  mutate(year = year(sample_date),
+         date = ymd(paste0(year, "-", month(sample_date), "-1"))) %>% 
+  filter(year %in% 2003:2007) 
+
+monthly_explore <- stream_explore %>% 
+  group_by(sample_id, date) %>%  
+  summarize(p_h = mean(p_h, na.rm = TRUE),
+            si_o2 = mean(si_o2, na.rm = TRUE),
+            temp = mean(temp, na.rm = TRUE)) 
+
+
+ggplot(monthly_explore,
+       aes(x = date)) +
+  geom_line(aes(y = log(p_h)), color = "blue") +
+  geom_line(aes(y = log(temp)), color = "red") +
+  geom_line(aes(y = log(si_o2)), color = "purple")
+        
+    # scale_y_continuous(
+    #   "ph",
+    #   sec.axis = sec_axis(~. * 0.25, name = "ph")
+    # )
+ 
+
+```
+
+## OLD
+
+```{r}
+stream_explore <- joined_data %>%
+  select(sample_id, sample_date, p_h, si_o2, temp) %>% 
+  mutate(year = year(sample_date),
+         date = ymd(paste0(year, "-", month(sample_date), "-1"))) %>% 
+  filter(year %in% 2003:2007) 
+
+monthly_explore <- stream_explore %>% 
+  group_by(sample_id, date) %>%  
+  summarize(p_h = mean(p_h, na.rm = TRUE),
+            si_o2 = mean(si_o2, na.rm = TRUE),
+            temp = mean(temp, na.rm = TRUE)) %>% 
+  pivot_longer(cols = p_h:temp, 
+               names_to = "indicator", 
+               values_to = "value")
+
+
+
+ggplot(monthly_explore,
+       aes(x = date,
+           y = value,
+           color = indicator)) +
+  geom_line() 
+    # scale_y_continuous(
+    #   "ph",
+    #   sec.axis = sec_axis(~. * 0.25, name = "ph")
+    # )
+```
