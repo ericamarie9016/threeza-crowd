@@ -1,9 +1,9 @@
 # Repository Assignment
 ## This repository contains all folders and files that we worked on for EDS 214.
 
-![image](https://user-images.githubusercontent.com/52255113/145565942-394015d2-638c-468a-b07a-91956b3c03b1.png)
+![image](https://www.researchgate.net/profile/Cory-Cleveland/publication/230841698/figure/fig1/AS:601609113452544@1520446198103/Luquillo-Experimental-Forest-Wood-and-Silver-3-have-studied-the-effect-of-drought-on.png)
 
-Credit: entrepreneurship.columbia.edu
+Credit: https://www.researchgate.net
 
 ## Repository Objectives:
 
