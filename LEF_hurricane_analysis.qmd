@@ -133,24 +133,30 @@ monthly_quality <- stream_quality %>%
 monthlyno3graph <- ggplot(monthly_quality, 
                           aes(x = date, 
                               y = monthlyno3)) +
-  geom_line(aes(color = sample_id)) +
+  geom_line(aes(color = sample_id,
+                linetype = sample_id)) +
   theme_classic() +
   theme(legend.title = element_blank(),
         axis.text.x = element_text(colour = "black"),
         axis.text.y = element_text(colour = "black")) +
   labs(x = "Year",
-       y = "K mg")
+       y = "K mg") +
+  geom_vline(xintercept = as.numeric(as.Date("1989-09-01")),
+             linetype = 4)
 
 monthlykgraph <- ggplot(monthly_quality, 
                         aes(x = date, 
                             y = monthlyk)) +
-  geom_line(aes(color = sample_id)) +
+  geom_line(aes(color = sample_id,
+                linetype = sample_id)) +
   theme_classic() +
   theme(legend.title = element_blank(),
         axis.text.x = element_text(colour = "black"),
         axis.text.y = element_text(colour = "black")) +
   labs(x = "Year",
-       y = "N03-N ug")
+       y = "N03-N ug") +
+  geom_vline(xintercept = as.numeric(as.Date("1989-09-01")),
+             linetype = 4)
   
 
 
@@ -242,8 +248,6 @@ temp_plot <- ggplot(data = min_monthly,
        subtitle = "Luquillo Mountain (Luquillo Experimental Forest) sites") 
 
 
-
-temp_plot
 ```
 
 ### Finding the equations for the linear regression for each site:
