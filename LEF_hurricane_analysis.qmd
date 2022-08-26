@@ -247,7 +247,7 @@ temp_plot <- ggplot(data = min_monthly,
        caption = "data source: https://doi.org/10.6073/pasta/1dd1a59a7e6fbe95fdf8736477d81b83",
        subtitle = "Luquillo Mountain (Luquillo Experimental Forest) sites") 
 
-
+temp_plot
 ```
 
 ### Finding the equations for the linear regression for each site:
@@ -303,5 +303,3 @@ lm_string_MPR
 # 
 # intercept <- lm_eqn$coefficients
 ```
-
-
