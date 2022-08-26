@@ -15,7 +15,7 @@ Credit: entrepreneurship.columbia.edu
 
 Hello! Thank you for taking the time to read through our repository. I hope you find everything easily. This is all the work we completed for the EDS 214 group project. We would also like to give a big thank you to Julian Brun for all of his hard work towards this course. Below you will find more information regarding the repository. Happy Coding! :)
 
-## This Repository contains the following folders and files: 
+# This Repository contains the following folders and files: 
 
 ## Folders:
 
