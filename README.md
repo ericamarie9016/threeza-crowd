@@ -11,7 +11,7 @@ Credit: entrepreneurship.columbia.edu
 #### 2. Communicate the chemistry change of local streams within the Luquillo Experimental Forest (LEF).
 #### 3. Show a clear progression in our workflow.
 
-## Tutorial Introduction:
+## Project Introduction:
 
 Hello! Thank you for taking the time to read through our repository. I hope you find everything easily. This is all the work we completed for the EDS 214 group project. We would also like to give a big thank you to Julian Brun for all of his hard work towards this course. Below you will find more information regarding the repository. Happy Coding! :)
 
@@ -32,7 +32,7 @@ A folder containing the notes that I took throughout this course. It also contai
 - .gitignore: A list of filetypes that should not be uploaded to the repository.
 - LICENSE: The licensing for the repository.
 - README.md: this file that you are reading right now outlining our goals and explaining the contents of the repository.
-- Tutorial_Instructions: The original assignment instructions.
+- Assignment_Instructions: The original assignment instructions.
 - Slideshow
 
 ## Contact Information:
@@ -46,15 +46,19 @@ Erica Dale        Github: @ericamarie9016   Email: ericadale@bren.ucsb.edu
 
 ## Assignment Workflow 
 
-# Edit this
-1. Figure out how to use Github.
-2. Organize my work into a few simple folders.
-3. Elaborate on those folders by creating subfolders.
-4. Keep track of weekly coding club tutorial progress and work by uploading them.
-5. Upload README files for each folder.
-6. Take course notes.
-7. Upload my challenges from the course, making edits where needed based off of feedback.
-8. Make final touches and thank teaching team for the great semester! (Thank you for such a great semester!!)
+1. Create a coding workflow.
+2. Divide up tasks
+3. Draft pseduocode.
+4. Work on code for first question
+5. Brainstorm code to create our second code
+6. Divide up tasks
+7. Draft pseduocode.
+8. Work on code for our second question.
+9. Upload README files for each folder.
+10. Take notes on our progress along the way.
+11. Clean up repository and put files in neat folders
+12. Update readme
+13. Make final touches and thank teaching team for the great semester! (Thank you for such a great semester!!)
 
 ## Coding Etiquette
 
