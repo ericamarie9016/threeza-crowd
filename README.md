@@ -19,13 +19,14 @@ Hello! Thank you for taking the time to read through our repository. I hope you 
 
 ## Folders:
 
-### [Plots](https://github.com/EdDataScienceEES/course-repository-mzargari/tree/master/Challenges):
-A folder containing all my work from the Challenges I completed. Folders for Challenges 1, 2, 3, and 4 are all contained in the folder.
+### [Plots](https://github.com/ericamarie9016/threeza-crowd/tree/main/plots):
+A folder containing all of the plots created and included in the slideshow presentation.
 
-### [Notes_and_Links](https://github.com/EdDataScienceEES/course-repository-mzargari/tree/master/Notes_and_Links):
-A folder containing the notes that I took throughout this course. It also contains links to websites that have information that I have used throughout the semester which help explain many concepts we have learned.
+### [Scripts](https://github.com/ericamarie9016/threeza-crowd/tree/main/scripts):
+A folder containing all of the scripts that we wrote for the both graphs.
 
-### [Tutorials_Readings_Videos](https://github.com/EdDataScienceEES/course-repository-mzargari/tree/master/Tutorials_Readings_Videos):
+### [Misc](https://github.com/ericamarie9016/threeza-crowd/tree/main/misc):
+R generated files and a backup code document that we created in case we lost any data.
 
 ## Files:
 
@@ -33,7 +34,6 @@ A folder containing the notes that I took throughout this course. It also contai
 - LICENSE: The licensing for the repository.
 - README.md: this file that you are reading right now outlining our goals and explaining the contents of the repository.
 - Assignment_Instructions: The original assignment instructions.
-- Slideshow
 
 ## Contact Information:
 
