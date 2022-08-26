@@ -115,14 +115,14 @@ joined_data <- bind_rows(bq1, bq2, bq3, prm)
 stream_quality <- joined_data %>%
   select(sample_id, sample_date, no3_n, k) %>% 
   mutate(year = year(sample_date),
-         date = ymd(paste0(year, "-", month(sample_date), "-1"))) %>% 
-  filter(year %in% 1988:1994) 
+         date = ymd(paste0(year, "-", month(sample_date), "-1"))) %>%  ## Coercing our own date format
+  filter(year %in% 1988:1994)   ## Filter to get data from 1988 to 1994
 
 ## We are summarizing the data to get the mean of each of our variables (nitrate and potassium)
 monthly_quality <- stream_quality %>% 
   group_by(sample_id, date) %>%  
-  summarize(monthlyno3 = mean(no3_n, na.rm = TRUE),
-            monthlyk = mean(k, na.rm = TRUE))
+  summarize(monthlyno3 = mean(no3_n, na.rm = TRUE),    ## Calculate the nean nitrate levels recorded for each month
+            monthlyk = mean(k, na.rm = TRUE))    ## Calculate the mean potassium levels recorded for each month
 ```
 
 ## Creating our first graph
@@ -133,15 +133,15 @@ monthly_quality <- stream_quality %>%
 monthlyno3graph <- ggplot(monthly_quality, 
                           aes(x = date, 
                               y = monthlyno3)) +
-  geom_line(aes(color = sample_id,
+  geom_line(aes(color = sample_id, ## Spliting graph lines by color and differntiating by line type
                 linetype = sample_id)) +
   theme_classic() +
   theme(legend.title = element_blank(),
-        axis.text.x = element_text(colour = "black"),
+        axis.text.x = element_text(colour = "black"),   ## Changing point colors
         axis.text.y = element_text(colour = "black")) +
-  labs(x = "Year",
+  labs(x = "Year",  ## Changing titles
        y = "K mg") +
-  geom_vline(xintercept = as.numeric(as.Date("1989-09-01")),
+  geom_vline(xintercept = as.numeric(as.Date("1989-09-01")), ## Adding a line to show hurricane Hugo date
              linetype = 4)
 
 
@@ -149,15 +149,15 @@ monthlyno3graph <- ggplot(monthly_quality,
 monthlykgraph <- ggplot(monthly_quality, 
                         aes(x = date, 
                             y = monthlyk)) +
-  geom_line(aes(color = sample_id,
+  geom_line(aes(color = sample_id, ## Spliting graph lines by color and differntiating by line type
                 linetype = sample_id)) +
   theme_classic() +
   theme(legend.title = element_blank(),
-        axis.text.x = element_text(colour = "black"),
+        axis.text.x = element_text(colour = "black"),   ## Changing point colors
         axis.text.y = element_text(colour = "black")) +
   labs(x = "Year",
        y = "N03-N ug") +
-  geom_vline(xintercept = as.numeric(as.Date("1989-09-01")),
+  geom_vline(xintercept = as.numeric(as.Date("1989-09-01")), ## Adding a line to show hurricane Hugo date
              linetype = 4)
   
 
@@ -218,13 +218,13 @@ monthlykgraph / monthlyno3graph
 monthly_temps <- joined_data %>%
   select(sample_id, sample_date, temp) %>% 
   mutate(year = year(sample_date),
-         date = ymd(paste0(year, "-", month(sample_date), "-1"))) %>% 
-  filter(year %in% 2010:2018) 
+         date = ymd(paste0(year, "-", month(sample_date), "-1"))) %>% ## Coercing our own date format
+  filter(year %in% 2010:2018)  ## Filter to get data from 2010 to 2018
 
 ## Finding the minimum tempurature every month
 min_monthly <- monthly_temps %>% 
   group_by(sample_id, date) %>%  
-  summarize(temp = min(temp))
+  summarize(temp = min(temp))    ## Calculate the minimum temperture recorded for each month
 ```
 
 ## Creating visualization
