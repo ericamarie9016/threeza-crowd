@@ -234,16 +234,16 @@ min_monthly <- monthly_temps %>%
 temp_plot <- ggplot(data = min_monthly,
        aes(x = date,
            y = temp)) +
-  geom_point(aes(color = sample_id)) +
-  scale_color_manual(values = c("#65AFC0", "#C986E7", "#6BCB9B", "darkgoldenrod2")) +
-  geom_smooth(method = lm, se = FALSE, col = 'darkorange3', size = 1) +
+  geom_point(aes(color = sample_id)) +  ## Separate colors based on sample_id
+  scale_color_manual(values = c("#65AFC0", "#C986E7", "#6BCB9B", "darkgoldenrod2")) + ## Adding new colors
+  geom_smooth(method = lm, se = FALSE, col = 'darkorange3', size = 1) +  ## Changing color line
   theme_minimal() +
-  facet_wrap(~sample_id) +
+  facet_wrap(~sample_id) + ## Separate graphs based on stream location
   theme_classic() +
   theme(legend.position = "none",
         axis.text.x = element_text(colour = "black"),
-        axis.text.y = element_text(colour = "black")) +
-  labs(x = "Year",
+        axis.text.y = element_text(colour = "black")) +    ## Change the point colors
+  labs(x = "Year",      ## Add titles and captions
        y = "Temperature (Celsius)",
        title = "Minimum monthly tempuratures from years 2010-2018",
        caption = "data source: https://doi.org/10.6073/pasta/1dd1a59a7e6fbe95fdf8736477d81b83",
