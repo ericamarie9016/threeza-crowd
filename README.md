@@ -54,11 +54,10 @@ Erica Dale        Github: @ericamarie9016   Email: ericadale@bren.ucsb.edu
 6. Divide up tasks
 7. Draft pseduocode.
 8. Work on code for our second question.
-9. Upload README files for each folder.
-10. Take notes on our progress along the way.
-11. Clean up repository and put files in neat folders
-12. Update readme
-13. Make final touches and thank teaching team for the great semester! (Thank you for such a great semester!!)
+9. Take notes on our progress along the way.
+10. Clean up repository and put files in neat folders
+11. Update readme
+12. Make final touches and thank teaching team for the great semester! (Thank you for such a great semester!!)
 
 ## Coding Etiquette
 
